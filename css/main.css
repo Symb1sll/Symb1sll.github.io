@@ -1384,7 +1384,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ffff3d;
+  background: #b0f4cb;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -1822,7 +1822,6 @@ pre code {
 }
 .back-to-top span {
   margin-right: 8px;
-  display: none;
 }
 .back-to-top .fa {
   text-align: center;
@@ -2717,4 +2716,11 @@ header.header {
   .sidebar-active .footer-fixed {
     left: 320px;
   }
+}
+.post-block {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: box-shadow 0.3s ease;
+}
+.post-block:hover {
+  box-shadow: 0 14px 38px rgba(0,0,0,0.12);
 }
