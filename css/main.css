@@ -1221,7 +1221,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #82a616;
+  background: #e5dedd;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2507,6 +2507,23 @@ header.header {
   .sidebar-active .footer-fixed {
     left: 320px;
   }
+}
+:root {
+  --theme-color: #e9edf3;
+  --btn-default-bg: #f8fafc;
+  --btn-default-color: #334155;
+  --btn-default-border-color: #d9e2ec;
+  --btn-default-hover-bg: #eef4f8;
+  --btn-default-hover-color: #1f2937;
+  --btn-default-hover-border-color: #cbd5e1;
+  --brand-color: #334155;
+  --brand-hover-color: #1f2937;
+}
+.headband {
+  background: #dbe7f0;
+}
+.brand {
+  box-shadow: 0 8px 22px rgba(148,163,184,0.18);
 }
 .post-block {
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
