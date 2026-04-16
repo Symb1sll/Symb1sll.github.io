@@ -1221,7 +1221,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ff711c;
+  background: #3261a3;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2690,6 +2690,12 @@ header.header {
 }
 .recent-posts-link:hover {
   color: #1d4ed8;
+}
+.recent-posts-time {
+  display: block;
+  color: #94a3b8;
+  font-size: 0.82em;
+  margin-bottom: 2px;
 }
 .post-end-marker {
   margin: 48px auto 12px;
