@@ -482,6 +482,35 @@ code.hljs {
 .hljs-strong {
   font-weight: bold
 }
+.highlight:hover .copy-btn,
+.code-container:hover .copy-btn {
+  opacity: 1;
+}
+.code-container {
+  position: relative;
+}
+.code-lang {
+  font-size: 40px;
+  line-height: 1;
+  opacity: 0.1;
+  pointer-events: none;
+  position: absolute;
+  right: 5px;
+}
+.copy-btn {
+  color: #333;
+  cursor: pointer;
+  line-height: 1.6;
+  opacity: 0;
+  padding: 2px 6px;
+  position: absolute;
+  transition: opacity 0.2s ease-in-out;
+  background: #fff;
+  border: 0;
+  font-size: 0.8125em;
+  right: 0;
+  top: 0;
+}
 code,
 kbd,
 figure.highlight,
@@ -1221,7 +1250,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #3261a3;
+  background: #ff45b6;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2716,4 +2745,38 @@ header.header {
   width: 42px;
   height: 1px;
   background: #cbd5e1;
+}
+.valine-comment-card {
+  margin: 28px 0 8px;
+  padding: 24px 28px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(15,23,42,0.07);
+}
+.valine-comment-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  color: #334155;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.valine-comment-title .fa {
+  color: #3b82f6;
+}
+.valine-empty {
+  padding: 14px 16px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  color: #64748b;
+  line-height: 1.8;
+}
+.valine-empty code {
+  padding: 2px 6px;
+  background: #e2e8f0;
+  border-radius: 6px;
+  color: #334155;
 }

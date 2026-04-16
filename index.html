@@ -329,24 +329,81 @@
 </noscript>
 <script>
 document.addEventListener('DOMContentLoaded', async () => {
-  const container = document.querySelector('[data-recent-posts]');
-  if (!container) return;
+  const recentPostsContainer = document.querySelector('[data-recent-posts]');
+
+  if (recentPostsContainer) {
+    try {
+      const response = await fetch('/recent-posts.json', { cache: 'no-store' });
+      if (response.ok) {
+        const posts = await response.json();
+        recentPostsContainer.innerHTML = posts.map(post => `
+          <li class="recent-posts-item">
+            <a class="recent-posts-link" href="${post.path}" rel="bookmark">
+              <time class="recent-posts-time">${post.date}</time>
+              ${post.title}
+            </a>
+          </li>
+        `).join('');
+      }
+    } catch (error) {
+      console.error('Failed to load recent posts:', error);
+    }
+  }
+
+  const commentContainer = document.getElementById('vcomments');
+  if (!commentContainer) return;
+
+  const loadScript = src => new Promise((resolve, reject) => {
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) {
+      if (window.Valine) resolve();
+      else existing.addEventListener('load', resolve, { once: true });
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+
+  const appId = '';
+  const appKey = '';
+
+  if (!appId || !appKey) {
+    commentContainer.innerHTML = `
+      <div class="valine-empty">
+        Valine 已接入。请先在 <code>_config.yml</code> 中填写 LeanCloud 的 <code>appId</code> 和 <code>appKey</code>。
+      </div>
+    `;
+    return;
+  }
 
   try {
-    const response = await fetch('/recent-posts.json', { cache: 'no-store' });
-    if (!response.ok) return;
+    if (!window.Valine) {
+      await loadScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js');
+    }
 
-    const posts = await response.json();
-    container.innerHTML = posts.map(post => `
-      <li class="recent-posts-item">
-        <a class="recent-posts-link" href="${post.path}" rel="bookmark">
-          <time class="recent-posts-time">${post.date}</time>
-          ${post.title}
-        </a>
-      </li>
-    `).join('');
+    new Valine({
+      el: '#vcomments',
+      appId,
+      appKey,
+      path: window.location.pathname,
+      placeholder: '欢迎留言交流',
+      avatar: 'mp',
+      pageSize: 10,
+      lang: 'zh-CN',
+      visitor: true,
+      recordIP: true,
+      enableQQ: true,
+      meta: ['nick', 'mail', 'link'],
+      requiredFields: ['nick', 'mail']
+      
+    });
   } catch (error) {
-    console.error('Failed to load recent posts:', error);
+    console.error('Failed to initialize Valine:', error);
+    commentContainer.innerHTML = '<div class="valine-empty">评论组件加载失败，请稍后刷新重试。</div>';
   }
 });
 </script>
