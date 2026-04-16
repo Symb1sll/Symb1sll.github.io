@@ -1221,7 +1221,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #b99c2b;
+  background: #ff711c;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2651,9 +2651,63 @@ header.header {
   content: '';
 }
 .post-block {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   transition: box-shadow 0.3s ease;
+  overflow: hidden;
 }
 .post-block:hover {
   box-shadow: 0 14px 38px rgba(0,0,0,0.12);
+}
+.recent-posts-widget {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+.recent-posts-title {
+  color: #334155;
+  font-size: 0.95em;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.recent-posts-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.recent-posts-item {
+  margin-bottom: 10px;
+}
+.recent-posts-item:last-child {
+  margin-bottom: 0;
+}
+.recent-posts-link {
+  color: #475569;
+  display: block;
+  line-height: 1.6;
+}
+.recent-posts-link:hover {
+  color: #1d4ed8;
+}
+.post-end-marker {
+  margin: 48px auto 12px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.95em;
+  letter-spacing: 0.08em;
+}
+.post-end-marker span {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.post-end-marker span:before,
+.post-end-marker span:after {
+  content: '';
+  display: inline-block;
+  width: 42px;
+  height: 1px;
+  background: #cbd5e1;
 }
