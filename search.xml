@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>第一篇文章</title>
+    <url>/2026/04/15/hello-world/</url>
+    <content><![CDATA[<p>这里是博客的第一篇文章，用来确认主题、页面样式和部署流程都已经正常工作。</p>
+<h2 id="当前状态"><a href="#当前状态" class="headerlink" title="当前状态"></a>当前状态</h2><ul>
+<li>已切换到 NexT 的 Muse 风格</li>
+<li>文章卡片阴影已启用</li>
+<li>页面滚动进度已显示</li>
+<li>页脚的 Powered by 文案已隐藏</li>
+</ul>
+<h2 id="后续可继续调整"><a href="#后续可继续调整" class="headerlink" title="后续可继续调整"></a>后续可继续调整</h2><ul>
+<li>站点标题、副标题和描述</li>
+<li>头像、菜单、社交链接</li>
+<li>首页布局和侧边栏信息</li>
+<li>文章封面、评论系统、代码高亮风格</li>
+</ul>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>本地预览、重新生成和部署都已经可以正常使用，后续只需要在写完文章或改完配置后重新部署即可。</p>
+]]></content>
+  </entry>
+</search>
