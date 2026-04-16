@@ -1221,7 +1221,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #0e3dc8;
+  background: #b99c2b;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2630,6 +2630,14 @@ header.header {
 }
 .brand {
   box-shadow: 0 8px 22px rgba(148,163,184,0.18);
+}
+.site-author-image {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  margin: 0 auto;
 }
 .post-tags .fa-tag {
   width: 14px;
