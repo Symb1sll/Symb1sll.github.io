@@ -1250,7 +1250,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #3452c3;
+  background: #cb520b;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2656,6 +2656,24 @@ header.header {
   --btn-default-hover-border-color: #cbd5e1;
   --brand-color: #334155;
   --brand-hover-color: #1f2937;
+}
+body {
+  background: url("/images/back.jpg") center center/cover fixed no-repeat;
+}
+.back-to-top,
+.sidebar,
+.header-inner,
+.footer,
+.main-inner {
+  background: transparent;
+}
+.content-wrap,
+.sidebar-inner,
+.site-brand-container,
+.comments {
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
 }
 .headband {
   background: #dbe7f0;
