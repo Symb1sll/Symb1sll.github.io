@@ -180,13 +180,7 @@
     <i class="far fa-clock fa-fw"></i>
     近期文章
   </div>
-  <ul class="recent-posts-list">
-        <li class="recent-posts-item">
-          <a class="recent-posts-link" href="/" rel="bookmark">
-            
-          </a>
-        </li>
-  </ul>
+  <ul class="recent-posts-list" data-recent-posts></ul>
 </div>
 
         </div>
@@ -345,6 +339,29 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const container = document.querySelector('[data-recent-posts]');
+  if (!container) return;
+
+  try {
+    const response = await fetch('/recent-posts.json', { cache: 'no-store' });
+    if (!response.ok) return;
+
+    const posts = await response.json();
+    container.innerHTML = posts.map(post => `
+      <li class="recent-posts-item">
+        <a class="recent-posts-link" href="${post.path}" rel="bookmark">
+          <time class="recent-posts-time">${post.date}</time>
+          ${post.title}
+        </a>
+      </li>
+    `).join('');
+  } catch (error) {
+    console.error('Failed to load recent posts:', error);
+  }
+});
+</script>
 
 </body>
 </html>
