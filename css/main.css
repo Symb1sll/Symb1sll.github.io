@@ -1221,7 +1221,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ffffc8;
+  background: #50ffb8;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2625,6 +2625,17 @@ header.header {
 }
 .brand {
   box-shadow: 0 8px 22px rgba(148,163,184,0.18);
+}
+.post-tags .fa-tag {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  margin-right: 0.35em;
+  vertical-align: -2px;
+  background: url("/images/book.png") center/contain no-repeat;
+}
+.post-tags .fa-tag:before {
+  content: '';
 }
 .post-block {
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
