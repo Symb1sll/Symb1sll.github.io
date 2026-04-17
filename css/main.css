@@ -1250,7 +1250,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #907ab5;
+  background: #f57ebf;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -1660,6 +1660,12 @@ pre code {
   color: #f00;
   display: inline-block;
   margin: 0 5px;
+}
+.busuanzi-count #busuanzi_container_site_uv {
+  display: none;
+}
+.busuanzi-count #busuanzi_container_site_pv {
+  display: none;
 }
 @keyframes icon-animate {
   0%, 100% {
@@ -2086,6 +2092,9 @@ pre code {
 .post-meta-break {
   flex-basis: 100%;
   height: 0;
+}
+#busuanzi_container_page_pv {
+  display: none;
 }
 .post-nav {
   border-top: 1px solid #eee;
@@ -2801,6 +2810,49 @@ input.search-input {
   color: #94a3b8;
   font-size: 0.82em;
   margin-bottom: 2px;
+}
+.custom-sidebar-card {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+.custom-sidebar-title {
+  color: #334155;
+  font-size: 0.95em;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.custom-sidebar-title .fa {
+  margin-right: 6px;
+  color: #2563eb;
+}
+.custom-sidebar-body {
+  color: #475569;
+  line-height: 1.8;
+  font-size: 0.92em;
+}
+.site-info-list {
+  display: grid;
+  gap: 10px;
+}
+.site-info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.75);
+}
+.site-info-label {
+  color: #64748b;
+  font-size: 0.9em;
+}
+.site-info-value {
+  color: #334155;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 .post-end-marker {
   margin: 48px auto 12px;

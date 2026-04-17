@@ -64,6 +64,7 @@
   <script src="/js/third-party/addtoany.js" defer></script>
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -178,12 +179,52 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Symb1sll" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Symb1sll" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
 <div class="recent-posts-widget animated">
   <div class="recent-posts-title">
     <i class="far fa-clock fa-fw"></i>
     近期文章
   </div>
   <ul class="recent-posts-list" data-recent-posts></ul>
+</div>
+
+<div class="custom-sidebar-card animated">
+  <div class="custom-sidebar-title">
+    <i class="fas fa-bullhorn fa-fw"></i>
+    公告
+  </div>
+  <div class="custom-sidebar-body">
+    欢迎来到 Symb1sll 的博客，记录学习、折腾和写作。
+  </div>
+</div>
+
+<div class="custom-sidebar-card animated">
+  <div class="custom-sidebar-title">
+    <i class="fas fa-chart-line fa-fw"></i>
+    站点信息
+  </div>
+  <div class="site-info-list" data-site-info>
+    <div class="site-info-item">
+      <span class="site-info-label">文章数</span>
+      <span class="site-info-value" data-site-info-articles>--</span>
+    </div>
+    <div class="site-info-item">
+      <span class="site-info-label">总访客</span>
+      <span class="site-info-value" data-site-info-uv>--</span>
+    </div>
+    <div class="site-info-item">
+      <span class="site-info-label">总访问量</span>
+      <span class="site-info-value" data-site-info-pv>--</span>
+    </div>
+    <div class="site-info-item">
+      <span class="site-info-label">最后更新</span>
+      <span class="site-info-value" data-site-info-updated>--</span>
+    </div>
+  </div>
 </div>
 
         </div>
@@ -254,6 +295,24 @@
     </span>
     <span class="author" itemprop="copyrightHolder">Symb1sll</span>
   </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
     </div>
   </footer>
@@ -277,25 +336,73 @@
 <script src="/js/third-party/comments/utterances.js" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', async () => {
-  const recentPostsContainer = document.querySelector('[data-recent-posts]');
-  if (!recentPostsContainer) return;
+  const updateRecentPosts = async () => {
+    const recentPostsContainer = document.querySelector('[data-recent-posts]');
+    if (!recentPostsContainer) return;
 
-  try {
-    const response = await fetch('/recent-posts.json', { cache: 'no-store' });
-    if (!response.ok) return;
+    try {
+      const response = await fetch('/recent-posts.json', { cache: 'no-store' });
+      if (!response.ok) return;
 
-    const posts = await response.json();
-    recentPostsContainer.innerHTML = posts.map(post => `
-      <li class="recent-posts-item">
-        <a class="recent-posts-link" href="${post.path}" rel="bookmark">
-          <time class="recent-posts-time">${post.date}</time>
-          ${post.title}
-        </a>
-      </li>
-    `).join('');
-  } catch (error) {
-    console.error('Failed to load recent posts:', error);
-  }
+      const posts = await response.json();
+      recentPostsContainer.innerHTML = posts.map(post => `
+        <li class="recent-posts-item">
+          <a class="recent-posts-link" href="${post.path}" rel="bookmark">
+            <time class="recent-posts-time">${post.date}</time>
+            ${post.title}
+          </a>
+        </li>
+      `).join('');
+    } catch (error) {
+      console.error('Failed to load recent posts:', error);
+    }
+  };
+
+  const updateSiteInfo = async () => {
+    const siteInfoRoot = document.querySelector('[data-site-info]');
+    if (!siteInfoRoot) return;
+
+    try {
+      const response = await fetch('/site-info.json', { cache: 'no-store' });
+      if (!response.ok) return;
+
+      const info = await response.json();
+      const articles = siteInfoRoot.querySelector('[data-site-info-articles]');
+      const updated = siteInfoRoot.querySelector('[data-site-info-updated]');
+
+      if (articles) articles.textContent = info.articleCount;
+      if (updated) updated.textContent = info.lastUpdated;
+    } catch (error) {
+      console.error('Failed to load site info:', error);
+    }
+  };
+
+  const syncCounter = (sourceSelector, targetSelector) => {
+    const target = document.querySelector(targetSelector);
+    if (!target) return;
+
+    const applyValue = () => {
+      const source = document.querySelector(sourceSelector);
+      const value = source && source.textContent ? source.textContent.trim() : '';
+      if (!value) return false;
+      target.textContent = value;
+      return true;
+    };
+
+    if (applyValue()) return;
+
+    const timer = window.setInterval(() => {
+      if (applyValue()) {
+        window.clearInterval(timer);
+      }
+    }, 500);
+
+    window.setTimeout(() => window.clearInterval(timer), 15000);
+  };
+
+  await Promise.all([updateRecentPosts(), updateSiteInfo()]);
+  syncCounter('#busuanzi_value_site_uv', '[data-site-info-uv]');
+  syncCounter('#busuanzi_value_site_pv', '[data-site-info-pv]');
 });
 </script>
 
