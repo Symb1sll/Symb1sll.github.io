@@ -198,7 +198,7 @@
     公告
   </div>
   <div class="custom-sidebar-body">
-    欢迎来到 Symb1sll 的博客，记录学习、折腾和写作。
+    欢迎来到 Symb1sll 的博客，记录学习、做题等等。主要是 CTF 方向啦~~~ QAQ
   </div>
 </div>
 
@@ -211,14 +211,6 @@
     <div class="site-info-item">
       <span class="site-info-label">文章数</span>
       <span class="site-info-value" data-site-info-articles>--</span>
-    </div>
-    <div class="site-info-item">
-      <span class="site-info-label">总访客</span>
-      <span class="site-info-value" data-site-info-uv>--</span>
-    </div>
-    <div class="site-info-item">
-      <span class="site-info-label">总访问量</span>
-      <span class="site-info-value" data-site-info-pv>--</span>
     </div>
     <div class="site-info-item">
       <span class="site-info-label">最后更新</span>
@@ -296,22 +288,6 @@
     <span class="author" itemprop="copyrightHolder">Symb1sll</span>
   </div>
 <div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
 </div>
 
     </div>
@@ -377,32 +353,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   };
 
-  const syncCounter = (sourceSelector, targetSelector) => {
-    const target = document.querySelector(targetSelector);
-    if (!target) return;
-
-    const applyValue = () => {
-      const source = document.querySelector(sourceSelector);
-      const value = source && source.textContent ? source.textContent.trim() : '';
-      if (!value) return false;
-      target.textContent = value;
-      return true;
-    };
-
-    if (applyValue()) return;
-
-    const timer = window.setInterval(() => {
-      if (applyValue()) {
-        window.clearInterval(timer);
-      }
-    }, 500);
-
-    window.setTimeout(() => window.clearInterval(timer), 15000);
-  };
-
   await Promise.all([updateRecentPosts(), updateSiteInfo()]);
-  syncCounter('#busuanzi_value_site_uv', '[data-site-info-uv]');
-  syncCounter('#busuanzi_value_site_pv', '[data-site-info-pv]');
 });
 </script>
 
