@@ -1250,7 +1250,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #58d1f0;
+  background: #f15741;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2738,6 +2738,21 @@ input.search-input {
 }
 .brand {
   box-shadow: 0 8px 22px rgba(148,163,184,0.18);
+}
+.site-nav .menu-item a,
+.site-nav .menu-item a .fa,
+.site-nav-right .toggle,
+.site-nav-toggle .toggle {
+  color: #334155;
+}
+.site-nav .menu-item a:hover,
+.site-nav .menu-item a.menu-item-active,
+.site-nav-right .toggle:hover,
+.site-nav-toggle .toggle:hover {
+  color: #0f172a;
+}
+.site-nav .menu-item a {
+  font-weight: 600;
 }
 .site-author-image {
   width: 96px;
