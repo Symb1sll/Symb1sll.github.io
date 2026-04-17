@@ -1250,7 +1250,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #8f6b49;
+  background: #58d1f0;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2661,7 +2661,7 @@ header.header {
   --brand-hover-color: #1f2937;
 }
 body {
-  background: url("/images/back.jpg") center center/cover fixed no-repeat;
+  background: #e7eef5 url("/images/back-optimized.jpg") center center/cover fixed no-repeat;
 }
 .back-to-top,
 .sidebar,
