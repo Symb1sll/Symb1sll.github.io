@@ -1250,7 +1250,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #d1faff;
+  background: #8f6b49;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2768,6 +2768,16 @@ input.search-input {
 }
 .post-block:hover {
   box-shadow: 0 14px 38px rgba(0,0,0,0.12);
+}
+.post-body {
+  padding-left: 28px;
+  padding-right: 28px;
+}
+@media (max-width: 767px) {
+  .post-body {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
 }
 .recent-posts-widget {
   margin-top: 24px;
