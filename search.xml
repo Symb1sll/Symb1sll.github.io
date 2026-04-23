@@ -22,7 +22,8 @@
   <entry>
     <title>robo admin</title>
     <url>/2026/04/23/robo-admin/</url>
-    <content><![CDATA[<h1 id="robo-admin"><a href="#robo-admin" class="headerlink" title="robo admin"></a>robo admin</h1><p>先看一下什么保护和沙箱吧</p>
+    <content><![CDATA[<h1 id="robo-admin"><a href="#robo-admin" class="headerlink" title="robo admin"></a>robo admin</h1><p>附件下载：<a href="https://github.com/Symb1sll/chall/blob/main/2026%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%B5%9B%E5%8C%BA%E5%9F%9F%E8%B5%9B/chall.zip">https://github.com/Symb1sll/chall/blob/main/2026%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%B5%9B%E5%8C%BA%E5%9F%9F%E8%B5%9B/chall.zip</a></p>
+<p>先看一下什么保护和沙箱吧。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">attily@attilyu:~/Downloads/contest/Soft_system_safety$ checksec robo_admin</span><br><span class="line">[*] <span class="string">&#x27;/home/attily/Downloads/contest/Soft_system_safety/robo_admin&#x27;</span></span><br><span class="line">    Arch:       amd64<span class="number">-64</span>-little</span><br><span class="line">    RELRO:      Full RELRO</span><br><span class="line">    Stack:      Canary found</span><br><span class="line">    NX:         NX enabled</span><br><span class="line">    PIE:        PIE enabled</span><br><span class="line">    SHSTK:      Enabled</span><br><span class="line">    IBT:        Enabled</span><br></pre></td></tr></table></figure>
 
 <p>保护全开。</p>
