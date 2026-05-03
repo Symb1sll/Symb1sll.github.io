@@ -598,7 +598,7 @@
 <script src="/js/third-party/comments/utterances.js" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', async () => {
-  const quotes = [
+  const fallbackQuotes = [
     ['风会记得每一条走过的路，所以慢一点也没关系。', '路边散步办'],
     ['太阳下山了也别急，晚霞本来就是给慢慢看的人准备的。', '黄昏观察员'],
     ['有些问题不必当场想通，先去吃饭，脑子和胃都需要版本更新。', '生活热补丁'],
@@ -608,7 +608,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     ['如果一整天都不顺，去看看树，它们站着不说话，也挺有力量。', '公园哲学课'],
     ['别总催自己立刻发光，很多星星也是天黑以后才认真上班。', '夜空值班表'],
     ['生活偶尔像乱码，但春天、晚风和好天气一直是可读的。', '季节翻译器'],
-    ['程序员的浪漫不只在终端里，也可以是在傍晚回家路上那阵刚好的风。', '下班风景线']
+    ['程序员的浪漫不只在终端里，也可以是在傍晚回家路上那阵刚好的风。', '下班风景线'],
+    ['把今天过好，比预支明天的焦虑划算得多。', '情绪节流器'],
+    ['云往前飘的时候，从来不会问自己够不够完美。', '天空研究室'],
+    ['不用每一天都闪闪发光，安安稳稳也很好看。', '普通日子收藏家'],
+    ['路灯不是太阳，但它依然认真照亮晚归的人。', '深夜街道办'],
+    ['如果心情很乱，就先把床铺平，生活会先整齐一点。', '微小秩序学'],
+    ['有些答案要在散步里想出来，不在屏幕前。', '步行思考派'],
+    ['春风从不催促花开，它只是按时路过。', '季节备忘录'],
+    ['偶尔停下来不是退步，是给灵魂一点缓冲。', '慢速通道'],
+    ['饭要一口一口吃，难题也一样，别想着一口吞下整个月亮。', '厨房哲学家'],
+    ['世界有时候很吵，那就先去听听树叶。', '自然降噪模式'],
+    ['夜里抬头看一眼星星，很多烦恼会自动缩小字号。', '宇宙排版师'],
+    ['不是所有赶路都要奔跑，散步也算抵达。', '松弛感协会'],
+    ['热闹有热闹的好，安静也有安静的光。', '黄昏双语字幕组'],
+    ['风景不会因为你晚到五分钟就取消，它通常比人更有耐心。', '户外宽容计划'],
+    ['今天做不完的事，明天也未必愿意做，不如先做一点。', '现实主义推进器'],
+    ['别把自己绷成一根弦，风一吹就想跑调。', '轻喜剧生存手册'],
+    ['人生不是冲刺题，有时候更像沿湖慢跑。', '湖边广播站'],
+    ['愿你写代码时有逻辑，看晚霞时有闲心。', '双线程祝福'],
+    ['一朵云飘过去，天不会因此空掉；一件事没做好，也不会定义你。', '低气压安慰剂'],
+    ['走累了就坐一会儿，树也是站久了才长成风景。', '长椅观察课'],
+    ['把心事拿去晒晒太阳，很多阴影就会自己缩回去。', '天气友好建议'],
+    ['你不需要每一刻都高效，偶尔发呆也是精神呼吸。', '偷闲合法化联盟'],
+    ['日子可以普通，心情不必总是紧急状态。', '生活稳压器'],
+    ['愿你翻过一页页难题后，也别错过窗外那一小块蓝天。', '桌边远望协会'],
+    ['真正靠谱的成长，通常不是突然开悟，而是慢慢不拧巴了。', '日常进化论']
   ];
 
   const updateRecentPosts = async () => {
@@ -652,15 +677,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   };
 
+  const loadOnlineQuote = async () => {
+    try {
+      const response = await fetch('https://v1.hitokoto.cn/?c=i&c=d&c=k&encode=json', { cache: 'no-store' });
+      if (!response.ok) return null;
+
+      const data = await response.json();
+      const text = (data.hitokoto || '').trim();
+      if (!text) return null;
+
+      const from = [data.from_who, data.from].filter(Boolean).join(' · ');
+      return [text, from || '一言'];
+    } catch (error) {
+      return null;
+    }
+  };
+
   const rotateQuotes = () => {
     const quoteText = document.querySelector('[data-quote-text]');
     const quoteMeta = document.querySelector('[data-quote-meta]');
-    if (!quoteText || !quoteMeta || !quotes.length) return;
+    if (!quoteText || !quoteMeta || !fallbackQuotes.length) return;
 
-    let current = Math.floor(Math.random() * quotes.length);
+    let current = Math.floor(Math.random() * fallbackQuotes.length);
 
-    const render = index => {
-      const [text, meta] = quotes[index];
+    const render = ([text, meta]) => {
       quoteText.classList.remove('is-visible');
       quoteMeta.classList.remove('is-visible');
 
@@ -672,10 +712,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       }, 140);
     };
 
-    render(current);
-    window.setInterval(() => {
-      current = (current + 1 + Math.floor(Math.random() * (quotes.length - 1))) % quotes.length;
-      render(current);
+    render(fallbackQuotes[current]);
+
+    window.setInterval(async () => {
+      const onlineQuote = await loadOnlineQuote();
+      if (onlineQuote) {
+        render(onlineQuote);
+        return;
+      }
+
+      current = (current + 1 + Math.floor(Math.random() * (fallbackQuotes.length - 1))) % fallbackQuotes.length;
+      render(fallbackQuotes[current]);
     }, 12000);
   };
 
