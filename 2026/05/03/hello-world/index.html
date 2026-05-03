@@ -227,6 +227,20 @@
   </div>
 </div>
 
+<div class="custom-sidebar-card sidebar-quote-card animated" data-quote-card>
+  <div class="custom-sidebar-title">
+    <i class="fas fa-face-smile-beam fa-fw"></i>
+    轻松语录
+  </div>
+  <div class="sidebar-quote-box">
+    <p class="sidebar-quote-text" data-quote-text>正在加载今日份不太严肃的人生建议……</p>
+    <div class="sidebar-quote-footer">
+      <span class="sidebar-quote-meta" data-quote-meta>刷新中</span>
+      <span class="sidebar-quote-refresh">每 12 秒换一句</span>
+    </div>
+  </div>
+</div>
+
         </div>
       </div>
     </div>
@@ -438,6 +452,17 @@
 <script src="/js/third-party/comments/utterances.js" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', async () => {
+  const quotes = [
+    ['今天不想动脑的时候，先动手，bug 会自己出现。', '工程学摸鱼定律'],
+    ['代码不会背叛你，它只会在凌晨两点诚实地报错。', '深夜调试协会'],
+    ['先别急着怀疑人生，先怀疑一下数组下标。', '越界受害者联盟'],
+    ['能跑就先跑，能睡再重构，这叫分阶段优化。', '务实派开发指南'],
+    ['看起来像玄学的问题，多半只是少了一个字符。', '编译器友情提示'],
+    ['调试五分钟，发呆两小时，也算一种异步执行。', '摸鱼并发模型'],
+    ['如果今天没有灵感，就先把日志打得像很有把握。', '排障表演艺术家'],
+    ['程序员的浪漫不是鲜花，是复现成功后的一句“我就说吧”。', '复现成功纪念馆']
+  ];
+
   const updateRecentPosts = async () => {
     const recentPostsContainer = document.querySelector('[data-recent-posts]');
     if (!recentPostsContainer) return;
@@ -479,6 +504,34 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   };
 
+  const rotateQuotes = () => {
+    const quoteText = document.querySelector('[data-quote-text]');
+    const quoteMeta = document.querySelector('[data-quote-meta]');
+    if (!quoteText || !quoteMeta || !quotes.length) return;
+
+    let current = Math.floor(Math.random() * quotes.length);
+
+    const render = index => {
+      const [text, meta] = quotes[index];
+      quoteText.classList.remove('is-visible');
+      quoteMeta.classList.remove('is-visible');
+
+      window.setTimeout(() => {
+        quoteText.textContent = text;
+        quoteMeta.textContent = meta;
+        quoteText.classList.add('is-visible');
+        quoteMeta.classList.add('is-visible');
+      }, 140);
+    };
+
+    render(current);
+    window.setInterval(() => {
+      current = (current + 1 + Math.floor(Math.random() * (quotes.length - 1))) % quotes.length;
+      render(current);
+    }, 12000);
+  };
+
+  rotateQuotes();
   await Promise.all([updateRecentPosts(), updateSiteInfo()]);
 });
 </script>
